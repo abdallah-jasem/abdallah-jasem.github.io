@@ -531,6 +531,74 @@
   .rv1 { transition-delay: 0.07s; }
   .rv2 { transition-delay: 0.14s; }
 
+
+  /* ═════════ MOBILE POLISH ═════════ */
+  @media (max-width: 640px) {
+    body { font-size: 15px; }
+    .wrap { padding: 0 18px; }
+    .hero { padding: 44px 0 40px; }
+    .hero h1 { font-size: clamp(30px, 8.5vw, 40px); }
+    .hero .sub { font-size: 15.5px; margin-bottom: 24px; }
+    .hero-cta { gap: 10px; }
+    .btn { padding: 12px 18px; font-size: 12.5px; flex: 1; justify-content: center; }
+    .crumb { font-size: 11px; display: block; line-height: 1.7; }
+    .crumb .dot { display: inline-block; margin-right: 7px; vertical-align: middle; }
+
+    /* JSON card */
+    .resp-card { font-size: 11.5px; border-radius: 12px; }
+    .resp-head { padding: 11px 14px; flex-wrap: wrap; gap: 7px; }
+    .resp-head .path { font-size: 11px; }
+    .resp-head .code200 { font-size: 10px; }
+    .resp-body { padding: 14px 14px 18px; min-height: 0; line-height: 1.75; }
+
+    section { padding: 46px 0; }
+    .ep-head { gap: 10px; }
+    .ep-head .ep-path { font-size: 24px; }
+    .ep-head .m-badge { font-size: 10.5px; padding: 3px 8px; }
+    .ep-head .ep-status { font-size: 10.5px; }
+    .ep-sub { font-size: 14px; margin-bottom: 26px; }
+
+    /* skill cards */
+    .sk-card { padding: 16px 16px; }
+    .chip { font-size: 11px; padding: 3px 8px; }
+
+    /* project rows */
+    .ep-row > button { padding: 13px 14px; gap: 9px; flex-wrap: wrap; }
+    .ep-row .pth { font-size: 12px; word-break: break-all; }
+    .ep-row .mtd { font-size: 10px; padding: 2px 7px; }
+    .ep-row .stt { font-size: 9.5px; padding: 2px 7px; }
+    .ep-body-in { padding: 4px 14px 18px; }
+    .ep-desc { font-size: 13.5px; }
+    .ep-points li { font-size: 13px; }
+    .grp-label { font-size: 10.5px; margin: 26px 0 10px; }
+
+    /* experience log */
+    .log { padding-left: 22px; }
+    .log-item::before { left: -29px; width: 10px; height: 10px; }
+    .log-item h3 { font-size: 17px; }
+    .log-item .ts { font-size: 11px; }
+    .log-item p { font-size: 13.5px; }
+
+    /* contact */
+    .contact-box { padding: 34px 18px; border-radius: 16px; }
+    .contact-box::before { display: none; }
+    .contact-box h2 { font-size: 24px; }
+    .contact-box .cl { font-size: 14px; }
+    .c-link { padding: 12px 14px; gap: 10px; }
+    .c-link .cl-k { width: 60px; font-size: 10px; }
+    .c-link .cl-v { font-size: 12px; word-break: break-all; }
+
+    /* footer */
+    footer { margin-top: 44px; padding: 24px 18px 30px; }
+    .ft-in { flex-direction: column; align-items: flex-start; gap: 10px; font-size: 11.5px; }
+  }
+
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 28px; }
+    .ep-row .pth { font-size: 11px; }
+    .resp-body { font-size: 10.5px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .rv { opacity: 1; transform: none; }
@@ -766,14 +834,14 @@
 
     </div>
 
-    <div class="grp-label">volunteer — syrmania assembly e.v.</div>
+    <div class="grp-label">volunteer — syrmania assembly e.v</div>
     <div class="ep-list">
 
       <div class="ep-row rv">
         <button onclick="toggleEp(this)" aria-expanded="false">
           <span class="mtd mtd-get">GET</span>
           <span class="pth">/projects/syrlink</span>
-          <span class="pname">Talent-matching platform</span>
+          <span class="pname">A professional networking platform</span>
           <span class="stt stt-live">LIVE · 200</span>
           <span class="chev">▾</span>
         </button>
@@ -815,7 +883,7 @@
         <p>Building microservices for the Tree e-commerce platform, extending Star Liga — a live football tournament API — and maintaining Ghasleh's real-time GPS tracking system.</p>
       </div>
       <div class="log-item rv rv1">
-        <div class="ts">[<b>2025-12</b> → present] · Remote</div>
+        <div class="ts">[<b>2025-12</b> → present] · Remote, Germany</div>
         <h3>Volunteer Backend Contributor</h3>
         <div class="org">Syrmania Assembly e.V.</div>
         <p>Contributing to SyrLink — building REST endpoints, membership flows, and pagination, and assisting in PostgreSQL repository migrations under senior supervision.</p>
