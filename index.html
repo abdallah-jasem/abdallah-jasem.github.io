@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdallah Jasem — Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Albert+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Syrian flag palette: green, white, black + red stars */
+    --paper: #FFFFFF;
+    --panel: #FFFFFF;
+    --ink: #121212;
+    --ink-soft: #4A4F4C;
+    --ink-faint: #8C938F;
+    --teal: #0E7A3D;            /* flag green */
+    --teal-soft: #E9F5EE;
+    --teal-bright: #2EBE6A;
+    --amber: #0E7A3D;
+    --amber-soft: #E9F5EE;
+    --green: #0E7A3D;
+    --green-soft: #E9F5EE;
+    --red: #0E7A3D;
+    --red-soft: #FBEAEC;
+    --code-bg: #101312;         /* flag black */
+    --code-line: #232826;
+    --syn-key: #7FD8A4;
+    --syn-str: #B9E8CB;
+    --syn-num: #A8E6C3;
+    --syn-dim: #5C645F;
+    --hair: #E6E9E7;
+    --r-md: 10px;
+    --r-lg: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Albert Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  ::selection { background: var(--teal); color: #fff; }
+
+  /* ───────── focus ───────── */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ═════════ NAV ═════════ */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(246,247,249,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--hair);
+  }
+  .nav-in {
+    max-width: 1000px; margin: 0 auto; padding: 0 24px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px; font-weight: 600;
+    color: var(--ink); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .brand .pfx { color: var(--teal); }
+  .nav-r { display: flex; align-items: center; gap: 22px; }
+  .nav-r a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px; color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.18s;
+  }
+  .nav-r a:hover { color: var(--teal); }
+  .nav-r a.cta {
+    color: var(--teal); font-weight: 600;
+    border: 1px solid var(--teal);
+    padding: 6px 14px; border-radius: 100px;
+    transition: all 0.18s;
+  }
+  .nav-r a.cta:hover { background: var(--teal); color: #fff; }
+  @media (max-width: 720px) { .nav-r a:not(.cta) { display: none; } }
+
+  /* ═════════ HERO ═════════ */
+  .hero { padding: 76px 0 64px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .crumb {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    margin-bottom: 22px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .crumb .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px var(--green-soft);
+    animation: heartbeat 2.4s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    12% { transform: scale(1.35); }
+    24% { transform: scale(1); }
+  }
+  .hero h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(40px, 6.4vw, 64px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-bottom: 14px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--teal);
+    position: relative;
+    white-space: nowrap;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 6px;
+    height: 10px;
+    background: var(--teal-soft);
+    z-index: -1;
+    border-radius: 3px;
+  }
+  .hero .sub {
+    font-size: 17px; color: var(--ink-soft);
+    max-width: 440px;
+    margin-bottom: 30px;
+  }
+  .hero .sub strong { color: var(--ink); font-weight: 600; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px; font-weight: 600;
+    text-decoration: none;
+    padding: 13px 24px;
+    border-radius: var(--r-md);
+    transition: all 0.2s ease;
+    display: inline-flex; align-items: center; gap: 8px;
+    border: none; cursor: pointer;
+  }
+  .btn-fill { background: var(--ink); color: #fff; }
+  .btn-fill:hover { background: var(--teal); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,118,110,0.25); }
+  .btn-line { background: transparent; color: var(--ink); border: 1.5px solid var(--hair); }
+  .btn-line:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* hero terminal/JSON */
+  .resp-card {
+    background: var(--code-bg);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(21,34,46,0.22);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+  }
+  .resp-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--code-line);
+  }
+  .method {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 9px; border-radius: 6px;
+    letter-spacing: 0.04em;
+  }
+  .m-get { background: rgba(20,184,166,0.15); color: var(--teal-bright); }
+  .resp-head .path { color: #B9C6D2; font-size: 12.5px; }
+  .resp-head .code200 {
+    margin-left: auto;
+    color: var(--syn-str); font-size: 11.5px;
+  }
+  .resp-body {
+    padding: 20px 22px 24px;
+    color: #C7D2DC;
+    line-height: 1.9;
+    min-height: 282px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .resp-body .k { color: var(--syn-key); }
+  .resp-body .s { color: var(--syn-str); }
+  .resp-body .n { color: var(--syn-num); }
+  .resp-body .d { color: var(--syn-dim); }
+  .caret {
+    display: inline-block;
+    width: 8px; height: 15px;
+    background: var(--teal-bright);
+    vertical-align: -2px;
+    animation: blink 0.9s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .resp-card { max-width: 540px; }
+  }
+
+  /* ═════════ ENDPOINT SECTION HEADERS (signature) ═════════ */
+  section { padding: 68px 0; }
+  .ep-head {
+    display: flex; align-items: baseline; gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .ep-head .m-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; font-weight: 600;
+    color: var(--teal);
+    background: var(--teal-soft);
+    padding: 4px 11px; border-radius: 7px;
+    letter-spacing: 0.03em;
+  }
+  .ep-head .ep-path {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .ep-head .ep-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; color: var(--green);
+  }
+  .ep-sub {
+    font-size: 15.5px; color: var(--ink-soft);
+    max-width: 560px;
+    margin-bottom: 38px;
+  }
+
+  /* ═════════ SKILLS ═════════ */
+  .sk-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .sk-card {
+    background: var(--panel);
+    border: 1px solid var(--hair);
+    border-radius: var(--r-lg);
+    padding: 20px 22px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .sk-card:hover {
+    border-color: var(--teal);
+    box-shadow: 0 6px 24px rgba(15,118,110,0.08);
+  }
+  .sk-card .sk-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sk-card .sk-name::before { content: '#'; color: var(--ink-faint); }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: all 0.16s;
+  }
+  .chip:hover { color: var(--teal); border-color: var(--teal); background: var(--teal-soft); }
+  @media (max-width: 860px) { .sk-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .sk-grid { grid-template-columns: 1fr; } }
+
+  /* ═════════ PROJECTS — ENDPOINT ACCORDION ═════════ */
+  .grp-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; font-weight: 500;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 34px 0 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .grp-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--hair);
+  }
+  .grp-label:first-of-type { margin-top: 0; }
+  .ep-list { display: flex; flex-direction: column; gap: 10px; }
+  .ep-row {
+    background: var(--panel);
+    border: 1px solid var(--hair);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .ep-row.open { border-color: var(--teal); box-shadow: 0 8px 28px rgba(15,118,110,0.1); }
+  .ep-row > button {
+    width: 100%;
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 20px;
+    background: none; border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+  }
+  .ep-row .mtd {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 9px; border-radius: 6px;
+    flex-shrink: 0;
+    letter-spacing: 0.03em;
+  }
+  .mtd-get { background: var(--teal-soft); color: var(--teal); }
+  .mtd-post { background: var(--amber-soft); color: var(--amber); }
+  .ep-row .pth {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px; font-weight: 500;
+    color: var(--ink);
+  }
+  .ep-row .pname {
+    font-size: 13.5px;
+    color: var(--ink-faint);
+  }
+  .ep-row .stt {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 9px; border-radius: 100px;
+    flex-shrink: 0;
+  }
+  .stt-live { background: var(--green-soft); color: var(--green); }
+  .stt-dev { background: var(--paper); color: var(--ink-faint); border: 1px solid var(--hair); }
+  .ep-row .chev {
+    color: var(--ink-faint);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 6px;
+  }
+  .ep-row.open .chev { transform: rotate(180deg); color: var(--teal); }
+  .ep-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+  }
+  .ep-body-in {
+    padding: 4px 20px 22px;
+    border-top: 1px dashed var(--hair);
+    margin: 0 0;
+  }
+  .ep-desc {
+    font-size: 14.5px; color: var(--ink-soft);
+    padding-top: 16px;
+    margin-bottom: 14px;
+    max-width: 640px;
+  }
+  .ep-points { list-style: none; margin-bottom: 16px; }
+  .ep-points li {
+    font-size: 14px; color: var(--ink-soft);
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 7px;
+  }
+  .ep-points li::before {
+    content: '–';
+    position: absolute; left: 2px;
+    color: var(--teal);
+    font-weight: 600;
+  }
+  .ep-meta {
+    display: flex; align-items: center;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .ep-meta .chip { background: var(--paper); }
+  .ep-meta a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px; font-weight: 600;
+    color: var(--teal);
+    text-decoration: none;
+    margin-left: auto;
+    display: inline-flex; align-items: center; gap: 5px;
+    transition: gap 0.18s;
+  }
+  .ep-meta a:hover { gap: 9px; }
+  @media (max-width: 640px) {
+    .ep-row .pname { display: none; }
+    .ep-meta a { margin-left: 0; width: 100%; }
+  }
+
+  /* ═════════ EXPERIENCE — LOG ═════════ */
+  .log {
+    border-left: 2px solid var(--hair);
+    padding-left: 28px;
+    display: flex; flex-direction: column; gap: 26px;
+    max-width: 680px;
+  }
+  .log-item { position: relative; }
+  .log-item::before {
+    content: '';
+    position: absolute;
+    left: -35px; top: 7px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--panel);
+    border: 2.5px solid var(--teal);
+  }
+  .log-item .ts {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .log-item .ts b { color: var(--teal); font-weight: 600; }
+  .log-item h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 19px; font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .log-item .org {
+    font-size: 14px; font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  .log-item p { font-size: 14.5px; color: var(--ink-soft); max-width: 560px; }
+
+  /* ═════════ ABOUT ═════════ */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .about-grid p { font-size: 15.5px; color: var(--ink-soft); }
+  .about-grid strong { color: var(--ink); font-weight: 600; }
+  @media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; gap: 18px; } }
+
+  /* ═════════ CONTACT ═════════ */
+  .contact-box {
+    background: var(--code-bg);
+    border-radius: 20px;
+    padding: 56px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-box::before {
+    content: 'curl -X POST /contact';
+    position: absolute;
+    top: 22px; right: 28px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--syn-dim);
+  }
+  .contact-box h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(26px, 3.6vw, 36px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .contact-box .cl { color: #93A5B5; font-size: 15px; max-width: 360px; }
+  .c-links { display: flex; flex-direction: column; gap: 10px; }
+  .c-link {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--code-line);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .c-link:hover {
+    border-color: var(--teal-bright);
+    background: rgba(20,184,166,0.07);
+    transform: translateX(5px);
+  }
+  .c-link .cl-k {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--syn-dim);
+    width: 72px; flex-shrink: 0;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .c-link .cl-v {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px; color: #D7E0E8;
+  }
+  .c-link .arr { margin-left: auto; color: var(--syn-dim); transition: all 0.2s; }
+  .c-link:hover .arr { color: var(--teal-bright); transform: translateX(3px); }
+  @media (max-width: 800px) {
+    .contact-box { grid-template-columns: 1fr; padding: 44px 28px; gap: 30px; }
+  }
+
+  /* ═════════ FOOTER ═════════ */
+  footer {
+    padding: 30px 24px 38px;
+    border-top: 1px solid var(--hair);
+    margin-top: 72px;
+  }
+  .ft-in {
+    max-width: 1000px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; color: var(--ink-faint);
+  }
+  .ft-in .pfx { color: var(--teal); }
+  .ft-links { display: flex; gap: 18px; }
+  .ft-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.18s; }
+  .ft-links a:hover { color: var(--teal); }
+
+  /* ═════════ REVEAL ═════════ */
+  .rv {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  }
+  .rv.in { opacity: 1; transform: none; }
+  .rv1 { transition-delay: 0.07s; }
+  .rv2 { transition-delay: 0.14s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .rv { opacity: 1; transform: none; }
+    .ep-body { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#"><span class="pfx">~/</span>abdallah-jasem</a>
+    <div class="nav-r">
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#experience">experience</a>
+      <a href="#about">about</a>
+      <a class="cta" href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═════════ HERO ═════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="crumb"><span class="dot"></span>currently @ ma-core · open to new opportunities · Latakia, Syria</div>
+        <h1>I design and ship <em>backend systems</em> that hold up in production.</h1>
+        <p class="sub">Backend developer at <strong>ma-core</strong> and volunteer contributor at <strong>Syrmania Assembly</strong>. I work in Node.js, NestJS, and PostgreSQL — building APIs with clean architecture and honest documentation.</p>
+        <div class="hero-cta">
+          <a class="btn btn-fill" href="#projects">Browse endpoints ↓</a>
+          <a class="btn btn-line" href="mailto:abdallahmjasem@gmail.com">Say hello</a>
+        </div>
+      </div>
+      <div>
+        <div class="resp-card">
+          <div class="resp-head">
+            <span class="method m-get">GET</span>
+            <span class="path">/developer/abdallah</span>
+            <span class="code200">200 OK · 12ms</span>
+          </div>
+          <div class="resp-body" id="json-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═════════ SKILLS ═════════ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="ep-head rv">
+      <span class="m-badge">GET</span>
+      <span class="ep-path">/skills</span>
+      <span class="ep-status">200 OK</span>
+    </div>
+    <p class="ep-sub rv rv1">The stack I reach for, grouped the way I actually use it.</p>
+    <div class="sk-grid">
+      <div class="sk-card rv">
+        <div class="sk-name">backend</div>
+        <div class="chips"><span class="chip">Node.js</span><span class="chip">NestJS</span><span class="chip">Express.js</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span></div>
+      </div>
+      <div class="sk-card rv rv1">
+        <div class="sk-name">api-development</div>
+        <div class="chips"><span class="chip">RESTful APIs</span><span class="chip">WebSockets</span><span class="chip">API Gateway</span><span class="chip">Swagger/OpenAPI</span><span class="chip">Socket.IO</span></div>
+      </div>
+      <div class="sk-card rv rv2">
+        <div class="sk-name">security</div>
+        <div class="chips"><span class="chip">Authentication</span><span class="chip">Authorization</span><span class="chip">OAuth</span><span class="chip">JWT</span><span class="chip">Data Encryption</span></div>
+      </div>
+      <div class="sk-card rv">
+        <div class="sk-name">databases</div>
+        <div class="chips"><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">TypeORM</span><span class="chip">Sequelize</span></div>
+      </div>
+      <div class="sk-card rv rv1">
+        <div class="sk-name">tools-testing</div>
+        <div class="chips"><span class="chip">Git</span><span class="chip">Docker</span><span class="chip">Firebase FCM</span><span class="chip">Jest</span><span class="chip">Supertest</span></div>
+      </div>
+      <div class="sk-card rv rv2">
+        <div class="sk-name">languages</div>
+        <div class="chips"><span class="chip">Arabic</span><span class="chip">English</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ PROJECTS ═════════ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="ep-head rv">
+      <span class="m-badge">GET</span>
+      <span class="ep-path">/projects</span>
+      <span class="ep-status">200 OK</span>
+    </div>
+    <p class="ep-sub rv rv1">Every row is a real system. Expand one to read what's inside.</p>
+
+    <div class="grp-label">professional — ma-core</div>
+    <div class="ep-list">
+
+      <div class="ep-row rv">
+        <button onclick="toggleEp(this)" aria-expanded="false">
+          <span class="mtd mtd-get">GET</span>
+          <span class="pth">/projects/tree-platform</span>
+          <span class="pname">Microservices e-commerce</span>
+          <span class="stt stt-dev">3 SERVICES</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="ep-body">
+          <div class="ep-body-in">
+            <p class="ep-desc">A microservices e-commerce platform split into three independent Node.js services that talk to each other over authenticated internal APIs.</p>
+            <ul class="ep-points">
+              <li>tree-sso — centralized Single Sign-On: JWT access/refresh flow, RBAC across 4 roles, bcrypt hashing, rate-limited login, and service-to-service token validation via shared secret</li>
+              <li>tree-shops — multi-tenant catalog with hierarchical categories, product variants, and live pricing; a SubCart model groups cart items by shop for multi-shop checkout in one order</li>
+              <li>Combo offers and group purchases with threshold triggers and a background scheduler</li>
+              <li>Shop moderation workflow (pending → approved/rejected), favorites, and ratings</li>
+              <li>tree-social — posts with up to 10 images, draft → published → archived lifecycle, threaded comments</li>
+            </ul>
+            <div class="ep-meta">
+              <span class="chip">Node.js</span><span class="chip">Express 5</span><span class="chip">MySQL</span><span class="chip">Sequelize</span><span class="chip">JWT</span><span class="chip">Swagger</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ep-row rv rv1">
+        <button onclick="toggleEp(this)" aria-expanded="false">
+          <span class="mtd mtd-get">GET</span>
+          <span class="pth">/projects/star-liga</span>
+          <span class="pname">Football tournament API</span>
+          <span class="stt stt-live">LIVE · 200</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="ep-body">
+          <div class="ep-body-in">
+            <p class="ep-desc">A production API running a regional football league — the full lifecycle from team registration to live match events and news publishing.</p>
+            <ul class="ep-points">
+              <li>Relational schema (MySQL + Sequelize) across Cities, Teams, Players, Matches, Events, News, Tournaments, and Sponsors</li>
+              <li>CRUD APIs with filtering, pagination, and state management (pending/accepted registration flow)</li>
+              <li>Firebase push notifications fired when match goals are scored</li>
+              <li>Many-to-many Sponsors ↔ Cities via junction model; file uploads with validation (Multer)</li>
+              <li>Rate limiting, centralized error handling, Swagger docs, migrations and seeders</li>
+            </ul>
+            <div class="ep-meta">
+              <span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">Sequelize</span><span class="chip">MySQL</span><span class="chip">Firebase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="grp-label">personal — built from zero</div>
+    <div class="ep-list">
+
+      <div class="ep-row rv">
+        <button onclick="toggleEp(this)" aria-expanded="false">
+          <span class="mtd mtd-post">POST</span>
+          <span class="pth">/projects/store-backend</span>
+          <span class="pname">E-commerce store API</span>
+          <span class="stt stt-dev">TESTED</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="ep-body">
+          <div class="ep-body-in">
+            <p class="ep-desc">A complete e-commerce backend built solo — the project where I went deepest on NestJS patterns and testing.</p>
+            <ul class="ep-points">
+              <li>User management with registration, login, and admin/user roles</li>
+              <li>JWT auth via Passport.js (Local + JWT strategies); RBAC with custom guards and decorators</li>
+              <li>Products & Categories CRUD, Orders with status tracking, and a Payments module</li>
+              <li>Migrations, seeding, pagination, soft deletes, and custom validators (class-validator, Joi)</li>
+              <li>Helmet security headers, rate limiting, and a Jest + Supertest test suite</li>
+            </ul>
+            <div class="ep-meta">
+              <span class="chip">NestJS</span><span class="chip">TypeScript</span><span class="chip">PostgreSQL</span><span class="chip">TypeORM</span><span class="chip">Jest</span>
+              <a href="https://github.com/abdallah-jasem/store-backend" target="_blank" rel="noopener">view source →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ep-row rv rv1">
+        <button onclick="toggleEp(this)" aria-expanded="false">
+          <span class="mtd mtd-post">POST</span>
+          <span class="pth">/projects/tadawi</span>
+          <span class="pname">Healthcare PMS</span>
+          <span class="stt stt-dev">DUAL DB</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="ep-body">
+          <div class="ep-body-in">
+            <p class="ep-desc">A multi-clinic healthcare practice management backend, designed around the reality that medical data is half relational, half free-form.</p>
+            <ul class="ep-points">
+              <li>Serves 4 roles — Admin, Doctor, Nurse, Patient — with JWT auth and RBAC</li>
+              <li>Dual-database architecture: PostgreSQL + TypeORM for relational data, MongoDB + Mongoose for medical notes with per-doctor visibility (public/private)</li>
+              <li>FHIR HL7-compliant appointment lifecycle: requested → booked → arrived → checked-in → fulfilled/no-show</li>
+              <li>Staff self-register and require admin approval before login</li>
+              <li>Interactive Swagger/OpenAPI documentation at /api/docs</li>
+            </ul>
+            <div class="ep-meta">
+              <span class="chip">NestJS</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span><span class="chip">Redis</span><span class="chip">JWT</span>
+              <a href="https://github.com/abdallah-jasem/Tadawi" target="_blank" rel="noopener">view source →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ep-row rv rv2">
+        <button onclick="toggleEp(this)" aria-expanded="false">
+          <span class="mtd mtd-post">POST</span>
+          <span class="pth">/projects/chatflow</span>
+          <span class="pname">Real-time chat API</span>
+          <span class="stt stt-dev">WEBSOCKET</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="ep-body">
+          <div class="ep-body-in">
+            <p class="ep-desc">A real-time group chat backend where the same JWT guards both the REST API and the WebSocket gateway.</p>
+            <ul class="ep-points">
+              <li>WebSocket connections authenticated on handleConnection via Bearer token from the handshake header</li>
+              <li>RBAC room roles (Owner/Admin/Member) with permission logic centralized in a RoomPermissionsHelper</li>
+              <li>Room management: create/update/delete, member add/remove, join/leave, role updates</li>
+              <li>Live broadcasting, typing indicators, and presence events</li>
+              <li>PostgreSQL + TypeORM entities with UUID keys; sanitize interceptor strips sensitive fields from every response</li>
+            </ul>
+            <div class="ep-meta">
+              <span class="chip">NestJS</span><span class="chip">Socket.IO</span><span class="chip">PostgreSQL</span><span class="chip">TypeORM</span><span class="chip">JWT</span>
+              <a href="https://github.com/abdallah-jasem/chatflow-api" target="_blank" rel="noopener">view source →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="grp-label">volunteer — syrmania assembly e.v.</div>
+    <div class="ep-list">
+
+      <div class="ep-row rv">
+        <button onclick="toggleEp(this)" aria-expanded="false">
+          <span class="mtd mtd-get">GET</span>
+          <span class="pth">/projects/syrlink</span>
+          <span class="pname">Talent-matching platform</span>
+          <span class="stt stt-live">LIVE · 200</span>
+          <span class="chev">▾</span>
+        </button>
+        <div class="ep-body">
+          <div class="ep-body-in">
+            <p class="ep-desc">A live platform matching Syrian skilled professionals with employers and international organizations for reconstruction. I contribute backend endpoints under senior supervision.</p>
+            <ul class="ep-points">
+              <li>Project membership flows: join, leave, and retrieval</li>
+              <li>Organization filtering fixed to return only accepted entries; pagination added for organization requests</li>
+              <li>Education and experience lists sorted newest-first</li>
+              <li>Repository layers migrated to PostgreSQL</li>
+            </ul>
+            <div class="ep-meta">
+              <span class="chip">Java 21</span><span class="chip">Spring Boot 3.3</span><span class="chip">PostgreSQL</span><span class="chip">Keycloak</span><span class="chip">Docker</span>
+              <a href="https://syrlink.app/landing" target="_blank" rel="noopener">visit syrlink.app →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ EXPERIENCE ═════════ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="ep-head rv">
+      <span class="m-badge">GET</span>
+      <span class="ep-path">/experience</span>
+      <span class="ep-status">200 OK</span>
+    </div>
+    <p class="ep-sub rv rv1">Where the code actually ships.</p>
+    <div class="log">
+      <div class="log-item rv">
+        <div class="ts">[<b>2026-04</b> → present] · Latakia</div>
+        <h3>Backend Developer</h3>
+        <div class="org">ma-core</div>
+        <p>Building microservices for the Tree e-commerce platform, extending Star Liga — a live football tournament API — and maintaining Ghasleh's real-time GPS tracking system.</p>
+      </div>
+      <div class="log-item rv rv1">
+        <div class="ts">[<b>2025-12</b> → present] · Remote</div>
+        <h3>Volunteer Backend Contributor</h3>
+        <div class="org">Syrmania Assembly e.V.</div>
+        <p>Contributing to SyrLink — building REST endpoints, membership flows, and pagination, and assisting in PostgreSQL repository migrations under senior supervision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ ABOUT ═════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="ep-head rv">
+      <span class="m-badge">GET</span>
+      <span class="ep-path">/about</span>
+      <span class="ep-status">200 OK</span>
+    </div>
+    <p class="ep-sub rv rv1">A little about who I am.</p>
+    <div class="about-grid rv">
+      <p>I'm a Computer Science student at <strong>Tishreen University</strong> in Latakia, Syria — but most of what I know about backend development comes from shipping real code. I work at <strong>ma-core</strong> building production APIs, and volunteer at <strong>Syrmania Assembly</strong> contributing to nonprofit digital tools.</p>
+      <p>I care about <strong>clean architecture</strong>, transaction-safe database operations, and APIs documented well enough that the frontend team doesn't have to ask questions. Currently looking for a backend role where I can keep growing inside a professional engineering team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ CONTACT ═════════ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-box rv">
+      <div>
+        <h2>Let's build something that holds up.</h2>
+        <p class="cl">I'm currently working at ma-core — and always open to hearing about backend roles and interesting projects. I usually reply within a day.</p>
+      </div>
+      <div class="c-links">
+        <a class="c-link" href="mailto:abdallahmjasem@gmail.com">
+          <span class="cl-k">email</span>
+          <span class="cl-v">abdallahmjasem@gmail.com</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="c-link" href="https://github.com/abdallah-jasem" target="_blank" rel="noopener">
+          <span class="cl-k">github</span>
+          <span class="cl-v">abdallah-jasem</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="c-link" href="https://linkedin.com/in/abdallah-jasem" target="_blank" rel="noopener">
+          <span class="cl-k">linkedin</span>
+          <span class="cl-v">in/abdallah-jasem</span>
+          <span class="arr">→</span>
+        </a>
+        <a class="c-link" href="https://wa.me/qr/76RJEY6WYXFWN1" target="_blank" rel="noopener">
+          <span class="cl-k">whatsapp</span>
+          <span class="cl-v">message me directly</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-in">
+    <div><span class="pfx">~/</span>abdallah-jasem · Latakia, Syria</div>
+    <div class="ft-links">
+      <a href="https://github.com/abdallah-jasem" target="_blank" rel="noopener">github</a>
+      <a href="https://linkedin.com/in/abdallah-jasem" target="_blank" rel="noopener">linkedin</a>
+      <a href="mailto:abdallahmjasem@gmail.com">email</a>
+      <a href="https://wa.me/qr/76RJEY6WYXFWN1" target="_blank" rel="noopener">whatsapp</a>
+    </div>
+    <div>© 2026 · made in Syria</div>
+  </div>
+</footer>
+
+<script>
+/* ── HERO JSON TYPING ── */
+(function() {
+  var el = document.getElementById('json-body');
+  if (!el) return;
+  var tokens = [
+    ['{\n', ''],
+    ['  ', ''], ['"name"', 'k'], [': ', ''], ['"Abdallah Jasem"', 's'], [',\n', ''],
+    ['  ', ''], ['"role"', 'k'], [': ', ''], ['"Backend Developer"', 's'], [',\n', ''],
+    ['  ', ''], ['"location"', 'k'], [': ', ''], ['"Latakia, Syria"', 's'], [',\n', ''],
+    ['  ', ''], ['"stack"', 'k'], [': [', ''], ['"Node.js"', 's'], [', ', ''], ['"NestJS"', 's'], [', ', ''], ['"PostgreSQL"', 's'], ['],\n', ''],
+    ['  ', ''], ['"projects_shipped"', 'k'], [': ', ''], ['7', 'n'], [',\n', ''],
+    ['  ', ''], ['"in_production"', 'k'], [': ', ''], ['true', 'n'], [',\n', ''],
+    ['  ', ''], ['"currently_at"', 'k'], [': ', ''], ['"ma-core"', 's'], [',\n', ''],
+    ['  ', ''], ['"open_to_offers"', 'k'], [': ', ''], ['true', 'n'], ['\n', ''],
+    ['}', ''],
+    ['\n\n', ''], ['// response cached — say hello anyway', 'd']
+  ];
+  var caret = document.createElement('span');
+  caret.className = 'caret';
+  el.appendChild(caret);
+  var ti = 0, ci = 0;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) {
+    tokens.forEach(function(t) {
+      var node = t[1] ? document.createElement('span') : document.createTextNode(t[0]);
+      if (t[1]) { node.className = t[1]; node.textContent = t[0]; }
+      el.insertBefore(node, caret);
+    });
+    return;
+  }
+  var curSpan = null;
+  function step() {
+    if (ti >= tokens.length) return;
+    var tok = tokens[ti];
+    if (ci === 0 && tok[1]) {
+      curSpan = document.createElement('span');
+      curSpan.className = tok[1];
+      el.insertBefore(curSpan, caret);
+    }
+    var ch = tok[0][ci];
+    if (tok[1]) { curSpan.textContent += ch; }
+    else { el.insertBefore(document.createTextNode(ch), caret); }
+    ci++;
+    if (ci >= tok[0].length) { ti++; ci = 0; curSpan = null; }
+    setTimeout(step, 14 + Math.random() * 18);
+  }
+  setTimeout(step, 600);
+})();
+
+/* ── ACCORDION ── */
+function toggleEp(btn) {
+  var row = btn.parentElement;
+  var body = row.querySelector('.ep-body');
+  var isOpen = row.classList.contains('open');
+  if (isOpen) {
+    body.style.maxHeight = body.scrollHeight + 'px';
+    requestAnimationFrame(function() { body.style.maxHeight = '0px'; });
+    row.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    row.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    body.style.maxHeight = body.scrollHeight + 'px';
+    setTimeout(function() {
+      if (row.classList.contains('open')) body.style.maxHeight = 'none';
+    }, 480);
+  }
+}
+
+/* ── SCROLL REVEAL ── */
+(function() {
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.rv').forEach(function(el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>
