@@ -3,8 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdallah Jasem — Backend Developer</title>
+<title>Backend Developer — Node.js, NestJS & PostgreSQL | Abdallah Jasem</title>
+<meta name="description" content="Backend developer specializing in Node.js, NestJS, and PostgreSQL. Building production APIs with clean architecture — see real projects and source code.">
+<link rel="canonical" href="https://abdallah-jasem.github.io/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="icon" type="image/png" href="favicon.png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Abdallah Jasem — Backend Developer">
+<meta property="og:description" content="Backend developer specializing in Node.js, NestJS, and PostgreSQL. Building production APIs with clean architecture — see real projects and source code.">
+<meta property="og:image" content="https://abdallah-jasem.github.io/og-image.png">
+<meta property="og:url" content="https://abdallah-jasem.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Abdallah Jasem">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Abdallah Jasem — Backend Developer">
+<meta name="twitter:description" content="Backend developer specializing in Node.js, NestJS, and PostgreSQL. Building production APIs with clean architecture.">
+<meta name="twitter:image" content="https://abdallah-jasem.github.io/og-image.png">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://abdallah-jasem.github.io/#person",
+  "name": "Abdallah Jasem",
+  "jobTitle": "Backend Developer",
+  "url": "https://abdallah-jasem.github.io/",
+  "worksFor": { "@type": "Organization", "name": "ma-core" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Tishreen University" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Latakia", "addressCountry": "SY" },
+  "knowsAbout": ["Node.js", "NestJS", "PostgreSQL", "REST APIs", "TypeScript"],
+  "sameAs": [
+    "https://github.com/abdallah-jasem",
+    "https://www.linkedin.com/in/abdallah-jasem"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Abdallah Jasem — Backend Developer",
+  "url": "https://abdallah-jasem.github.io/",
+  "author": { "@id": "https://abdallah-jasem.github.io/#person" }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Albert+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -35,6 +80,11 @@
     --r-lg: 16px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Albert Sans', sans-serif;
@@ -649,12 +699,14 @@
   </div>
 </header>
 
+<main>
+
 <!-- ═════════ SKILLS ═════════ -->
 <section id="skills">
   <div class="wrap">
     <div class="ep-head rv">
       <span class="m-badge">GET</span>
-      <span class="ep-path">/skills</span>
+      <h2 class="ep-path">/skills<span class="sr-only"> — Technical skills</span></h2>
       <span class="ep-status">200 OK</span>
     </div>
     <p class="ep-sub rv rv1">The stack I reach for, grouped the way I actually use it.</p>
@@ -692,7 +744,7 @@
   <div class="wrap">
     <div class="ep-head rv">
       <span class="m-badge">GET</span>
-      <span class="ep-path">/projects</span>
+      <h2 class="ep-path">/projects<span class="sr-only"> — Backend projects Abdallah Jasem has shipped</span></h2>
       <span class="ep-status">200 OK</span>
     </div>
     <p class="ep-sub rv rv1">Every row is a real system. Expand one to read what's inside.</p>
@@ -897,19 +949,19 @@
   <div class="wrap">
     <div class="ep-head rv">
       <span class="m-badge">GET</span>
-      <span class="ep-path">/experience</span>
+      <h2 class="ep-path">/experience<span class="sr-only"> — Work experience</span></h2>
       <span class="ep-status">200 OK</span>
     </div>
     <p class="ep-sub rv rv1">Where the code actually ships.</p>
     <div class="log">
       <div class="log-item rv">
-        <div class="ts">[<b>2026-04</b> → present] · Latakia</div>
+        <div class="ts">[<time datetime="2026-04"><b>2026-04</b></time> → present] · Latakia</div>
         <h3>Backend Developer</h3>
         <div class="org">ma-core</div>
         <p>Building microservices for the Tree e-commerce platform, extending Star Liga — a live football tournament API — and maintaining Ghasleh's real-time GPS tracking system.</p>
       </div>
       <div class="log-item rv rv1">
-        <div class="ts">[<b>2025-12</b> → present] · Remote, Germany</div>
+        <div class="ts">[<time datetime="2025-12"><b>2025-12</b></time> → present] · Remote, Germany</div>
         <h3>Volunteer Backend Contributor</h3>
         <div class="org">Syrmania Assembly e.V.</div>
         <p>Contributing to SyrLink — building REST endpoints, membership flows, and pagination, and assisting in PostgreSQL repository migrations under senior supervision.</p>
@@ -923,7 +975,7 @@
   <div class="wrap">
     <div class="ep-head rv">
       <span class="m-badge">GET</span>
-      <span class="ep-path">/about</span>
+      <h2 class="ep-path">/about<span class="sr-only"> — About Abdallah Jasem</span></h2>
       <span class="ep-status">200 OK</span>
     </div>
     <p class="ep-sub rv rv1">A little about who I am.</p>
@@ -967,6 +1019,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="ft-in">
